@@ -1,0 +1,77 @@
+Software Development Continuous Assessment
+
+Agile model:
+-iteration-friendly: can build in small increments
+-test driven development: can follow the driver and navigator model shown in class and give continuous feedback per test pass/fail
+-helps keep the design at minimal 
+-more flexible and adaptable than waterfall
+-need to make development log per session (indication driver/ navigator)
+
+-------------------------------------------------------------------------------------
+
+input: number of players (n) 
+     : valid pack fine (8n)
+
+output: playerX_output.txt
+      : deckX_output.txt
+
+classes:
++(public class)
+-(private class)
+
+CARD 
+fields
+-value: int (stores denomination of card)
+methods
++card(value:int) (contructor)
++getValue():int (getter)
+card objects will not change overtime
+
+DECK
+fields
+-id: int (identifies deck)
+methods
+-cards: Queue<Card> (holds cards in first in first out order)
++Deck(id:int) (create new empty deck with an id)
++draw(): Card (removes and returns front card)
++discard(c:Card):void (ass to back of queue)
++getContents():List<int> (returns deck cards in order)
+need to be synchronised draw+discard operation to prevent conflict with other players
+at the end of game need to write getContents() into deckX_output.txt
+
+PLAYER
+fields
+-id:int (identifies player)
+-preferredValue:int 
+-hand: List<Card> (most be 4 card hand)
+-leftDeck: Deck
+-rightDeck: Deck
+logWriter: BufferedWriter (writes to playerX_output.txt)
+-gameWon: Boolean (shared flag for stopping game)
+methods
++player(in:int, left:Deck, right:Deck, log:Writer, preferred: int)
++run(): void (log initial hand, checks if hand is winning if not the draws and discards deck then checks again)
+-drawAndDiscard(): void (one turn)
+-hasWinningHand(): Boolean (retrun true if all values are same)
+-chooseDiscard(): card (pick card to discard)
+gameWon is static and volatile
+need to go over file format rules for output logging again
+each player exits at end of game
+
+main:
+CARDGAME
+fields
+-players: List<Player>
+-decks: List<Deck>
+-pack: List<Card>
+methods
++main(args:String[]: void (reads n, ask for file apth, validate pack, call dealCards and startGame)
++loadPack(file:String, n:int): List<Card> (read integers from file, build list of cards)
+_dealCards():void (distribute 4 cards per players, remaining cards to deck)
++startGame():void (create log writers for players, start player threads, write final deck state to file)
+-validatePack(file:String, n:int): Boolean
+ensure n and packfile is valid before starting
+each player has its own output file
+at end deck gets its own output file
+use round robin data structure for card distributing( first player then decks)
+
