@@ -75,3 +75,35 @@ each player has its own output file
 at end deck gets its own output file
 use round robin data structure for card distributing( first player then decks)
 
+--------------------------------------------------------------------------------------------------
+timeline plan
+30 sep- 5 oct
+-set up GitHup repo
+-implement and test:
+--card class
+--deck class
+-start drafting report (design methodology)
+
+6oct-12 oct
+-implement and test:
+--player class
+-verify multi-threading is working well
+-add player and deck outputs
+-update report with class design choice, create UML diagram
+
+13 oct- 19 oct
+-implement main class
+-integrated tests
+-start report: testing stratergy
+
+20 cot-26 oct
+-focus on tests and error handling
+-refactor code and clean up comments
+-finalise report draft (design, testing, development)
+
+27 oct- 1 nov
+-generate sample logs
+-final playthrough
+-packages
+-run through README
+-zip everything
