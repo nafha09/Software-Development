@@ -1,3 +1,10 @@
 Day 1 
-29/09/2025 12:00 - 
+29/09/2025 12:00 - 13:00
+setup githib repositary.
+created the most obvious classes
+set a timeline 
+started working on writing classes 
 
+Day 2 
+01/10/2025
+14:30 - 15:30
