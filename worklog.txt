@@ -7,4 +7,11 @@ started working on writing classes
 
 Day 2 
 01/10/2025
-14:30 - 15:30
+14:00 - 15:00
+read through the card class
+came up with a design to further develop the code 
+for the next meeting (as per the timeline)
+- test card class/create deck class  - nafha
+- start on design methodology reports - asilin
+
+
