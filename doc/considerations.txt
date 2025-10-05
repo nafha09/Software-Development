@@ -1,0 +1,42 @@
+1) make the file? 
+txt file kind of like a test
+
+2) develop the classes?
+
+
+sequence 
+1) read input files (txt)
+2) distribute to players (4 cards each)
+3) distribute to decks (all of the remaining equally)
+4) store the cards in players(hands) and decks 
+5) initialise game play ( all players will do the next bit simultaneously) ( print functionality)
+    1) pick a card from their left
+    2) process the card ( comapre it with the cards at hand / preferred card thingy)
+    3) discard a card to the right
+6) keep taking rounds (checking if the 4 cards are of the same number / if won )
+7) over whenn one or more players have 4 of the same cards
+
+/// can win even if the four cards are not the preferred cards.
+/// hve to check if the players won at the start of the game.
+/// need a step to assign preferred cards?
+/// fifo (pick up card from top, discard to bottom)
+//// have to print all functions
+
+
+// how to assign players left and right 
+ player id + 1 
+
+ put an execption when assigning left and right
+ if player = number of players, start from the beginning
+
+when making this exception, should we make it in the main class?
+
+should we include      
+* @throws PlayerWonException ???? if the deck has 4 cards of same value at the beginnning??? 
+or have a method check this in main 
+
+
+alssoooo
+is carddeck supposed to be deck?
+
+
