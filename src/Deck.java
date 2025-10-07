@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Represents the decks of cards in the game
  * each deck will have an id
@@ -6,6 +8,7 @@
  * must discard cards from top and insert cards to bottom.
  * be assigned left and right
  */
+
  
 public final class Deck{
     private final List<Card> cards; //list to hold the card objects
@@ -14,13 +17,13 @@ public final class Deck{
     /**
      * constructor
      * @param id -the integer of card
+     * @param cards -list
      * @throws illegalArgumentException is value is negative
      * @throws EmptyDeckException if there are no cards in the deck
      */
     public Deck(int id, List<Card> cards) throws EmptyDeckException {
         if (id<0) { // excluding non-negative numbers  
             throw new IllegalArgumentException ("Deck must be non-negative");
-
         }
         if (cards == null || cards.isEmpty()) {
             throw new EmptyDeckException("Deck is not empty");
@@ -37,32 +40,33 @@ public final class Deck{
         return cards.isEmpty();
     }
     //// game play methods drawcard and discardcard
-    public Card discardCard() {
-    if(card == null || cards.isEmpty()){
-        throw EmptyDeckException("Deck is not empty");
+    public synchronized Card discardCard() throws EmptyDeckException{
+        if(cards.isEmpty()){ //card == null || 
+            throw new EmptyDeckException("Deck is not empty");
+            }
+        return cards. remove(0);
     }
-    return cards. remove(0);
+    public synchronized void drawCard(Card card) {
+        if(card == null){ // || cards.isEmpty()
+            throw new EmptyDeckException("Deck is not empty");
     }
-    public void drawCard(Card card) {
-        if(card == null || cards.isEmpty()){
-        throw EmptyDeckException("Deck is not empty");
-    }
-    cards.add(card);
-        }
+        cards.add(card);
     }
     // method to check if won
-    public boolean sameCards() {
-        if(card == null || cards.isEmpty())
-        return true;
+    public synchronized boolean sameCards() {
+        if(cards.isEmpty()){ //card == null || 
+        return false;
+        }
         // check if the first value matches the value of the other 4
         int card1 = cards.get(0).getValue();
         for (Card c : cards) {
             if (c.getValue() != card1) {
-                return false
+                return false;
             }
         }
         return true;
     }
+}
 
 /**
  * assign id
