@@ -2,8 +2,10 @@
 coursework
 
 // how to run the files
-javac 
+javac -d out src/TestFileName.java //bin or out
+java -cp out TestFileName
 
+javac -d out src/Card.java src/CardTest.java // to run both files together
 
 /// file locations 
 > bin 
