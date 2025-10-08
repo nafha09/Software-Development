@@ -17,6 +17,13 @@ for the next meeting (as per the timeline)
 Day 3 
 08/10/2015
 16:00 - 17:00
+checked the progress on last weeks tasks
+talked about how the bugs were fixed in cardtest/ deck
+- work on player class first - aislin
+- player test class - nafha
+- deck test class - aislin
+- uml diagram - nafha 
+
 
 
 
