@@ -26,7 +26,7 @@ public final class Deck{
             throw new IllegalArgumentException ("Deck must be non-negative");
         }
         if (cards == null || cards.isEmpty()) {
-            throw new EmptyDeckException("Deck is not empty");
+            throw new EmptyDeckException("Deck is empty");
         }
         this.id = id;
         this.cards = new ArrayList<>(cards); //new list
@@ -42,13 +42,13 @@ public final class Deck{
     //// game play methods drawcard and discardcard
     public synchronized Card discardCard() throws EmptyDeckException{
         if(cards.isEmpty()){ //card == null || 
-            throw new EmptyDeckException("Deck is not empty");
+            throw new EmptyDeckException("Deck is empty");
             }
         return cards. remove(0);
     }
-    public synchronized void drawCard(Card card) {
+    public synchronized void drawCard(Card card) throws EmptyDeckException {
         if(card == null){ // || cards.isEmpty()
-            throw new EmptyDeckException("Deck is not empty");
+            throw new EmptyDeckException("Deck is empty");
     }
         cards.add(card);
     }
@@ -65,6 +65,19 @@ public final class Deck{
             }
         }
         return true;
+    }
+    @Override
+    public String toString(){
+        StringBuilder sb= new StringBuilder();
+        sb.append("Deck ").append(id).append(": [");
+        for (int i=0; i< cards.size(); i++) {
+            sb.append(cards.get(i).getValue());
+            if (i< cards.size() -1){
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }
 
