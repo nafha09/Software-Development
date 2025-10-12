@@ -11,7 +11,7 @@ import java.util.List;
 
  public class Player implements Runnable{
 
-    private final in playerId;
+    private final int playerId;
     private final List<Card> hand;
     private Deck leftDeck;
     private Deck rightDeck;
@@ -71,7 +71,7 @@ import java.util.List;
      * @throws EmptyDeckException if the left deck is empty
      * @throws IllegalStateException if the left deck has not been assigned
      */
-    public synchronized void discard() throws EmptyDeckException{
+    public synchronized void discardCard() throws EmptyDeckException{
         if (leftDeck==null){
             throw new IllegalStateException("Left deck is empty");
         }
@@ -113,8 +113,6 @@ import java.util.List;
             }
         } catch (EmptyDeckException e){
             System.err.println("Player"+playerId+"has encounted an empty deck");
-        } catch (InterruptedException e){
-            Thread.currentThread().interrupt();
         }
     }
 
