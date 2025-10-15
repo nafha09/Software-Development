@@ -39,4 +39,6 @@ or have a method check this in main
 alssoooo
 is carddeck supposed to be deck?
 
+should we include a method to check if the card is of the preffered value in player class
+
 
