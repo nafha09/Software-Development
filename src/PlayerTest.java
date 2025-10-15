@@ -9,7 +9,7 @@ public class PlayerTest{
             Card card_three=new Card(3);
             Card card_four=new Card(4);
             Card card_five=new Card(-2);
-            List<Card> playerhand=Arrays.asList(card_one,card_two,card_three,card_four);
+            List<Card> startingCards=Arrays.asList(card_one,card_two,card_three,card_four);
 
             // checking the credibilities of the card
             System.out.println("Value =" + card_one.getValue());
@@ -23,7 +23,7 @@ public class PlayerTest{
             System.out.println("Value =" + card_five.getValue());
             System.out.println("String = " +  card_five.toString());
             // checking player hand
-            Player player=new Player(1,playerhand);
+            Player player=new Player(1,startingCards);
             System.out.println("Player's hand at the start: "+player);
 
 
