@@ -16,6 +16,7 @@ import java.util.List;
     private Deck leftDeck;
     private Deck rightDeck;
     private boolean hasWon;
+    private final int preferredValue;
 
     /**
      * constructor
@@ -33,6 +34,7 @@ import java.util.List;
         this.playerId=playerId;
         this.hand=new ArrayList<>(startingCards);
         this.hasWon=false;
+        this.preferredValue = playerId.getValue();
     }
 
     /// setting decks

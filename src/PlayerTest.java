@@ -8,7 +8,7 @@ public class PlayerTest{
             Card card_two=new Card(2);
             Card card_three=new Card(3);
             Card card_four=new Card(4);
-            Card card_five=new Card(-2);
+            //Card card_five=new Card(-2);
             List<Card> startingCards=Arrays.asList(card_one,card_two,card_three,card_four);
 
             // checking the credibilities of the card
