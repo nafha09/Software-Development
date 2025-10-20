@@ -35,6 +35,9 @@ public final class Deck{
     public int getId() {
         return id;
     }
+    public List<Card> getCards() {
+    return cards;
+}
     /// methods
     public boolean isEmpty() {
         return cards.isEmpty();
