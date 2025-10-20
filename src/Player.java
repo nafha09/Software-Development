@@ -34,7 +34,7 @@ import java.util.List;
         this.playerId=playerId;
         this.hand=new ArrayList<>(startingCards);
         this.hasWon=false;
-        this.preferredValue = playerId.getValue();
+        this.preferredValue = playerId;
     }
 
     /// setting decks
@@ -52,6 +52,14 @@ import java.util.List;
 
     public boolean hasWon(){
         return hasWon;
+    }
+
+    /**
+     * add cards to players hand during set
+     * @param card to add
+     */
+    public void addCard(Card card){
+        hand.add(card);
     }
 
     //Gameplay
