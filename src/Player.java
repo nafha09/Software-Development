@@ -59,6 +59,10 @@ import java.util.List;
         return playerId;
     }
 
+    public int getPreferredValue(){
+        return playerId;
+    }
+
     public boolean hasWon(){
         return hasWon;
     }
@@ -96,6 +100,9 @@ import java.util.List;
         }
         if (!hand.isEmpty()){
             Card discarded=hand.remove(0);
+            if (discarded.getValue().equals(preferredValue)){
+                return; 
+            }  
             leftDeck.drawCard(discarded);
             log("Player"+playerId+"discards"+discarded.getValue()+"to deck"+leftDeck.getId());
         }
