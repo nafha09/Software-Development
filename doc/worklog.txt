@@ -43,3 +43,8 @@ Day 5
 deck class exception issue
 fix deck.java 
 - test main cardgame - nafha
+whats remaining 
+- j unit testing ( comply the already written tests as j unit)
+- documentation
+- jar file 
+- finish the report and have aislin proof read and correct it 
