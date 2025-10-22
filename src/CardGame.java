@@ -24,8 +24,11 @@ public class CardGame{
             String line;
             while ((line=br.readLine())!= null){
                 int value =Integer.parseInt(line.trim());
+                if (value<0)throw new IOException ("Negative card value in pack");
                 pack.add(new Card(value));
             }
+        } catch (NumberFormatException e){
+            throw new IOException("Invalid number format in pack");
         }
     }
      
@@ -63,11 +66,12 @@ public class CardGame{
         }
         //deal remaining to deck
         for (int i=0; i< numPlayers; i++){
-            List<Card> deckCards=new ArrayList<>();
+            //List<Card> deckCards=new ArrayList<>();
             for (int j=0; j<4; j++){
-                deckCards.add(pack.get(cardIndex++));
+                decks.get(i).drawCard(pack.get(cardIndex++));
+                //deckCards.add(pack.get(cardIndex++));
             }
-            decks.get(i).getCards().addAll(deckCards);
+            //decks.get(i).getCards().addAll(deckCards);
         }
     }
 
@@ -86,7 +90,18 @@ public class CardGame{
                 Thread.currentThread().interrupt();
             }
         }
-        System.out.println("complete");
+        writeFinalDecks();
+        System.out.println("Game complete");
+    }
+
+    private void writeFinalDecks(){
+        for (Deck d: decks){
+            try (FileWriter fw= new FileWriter("deck"+d.getId()+"output.txt")){
+                fw.write(d.toString());
+            } catch (IOException e){
+                System.err.println("Error writing deck output "+e.getMessage());
+            }
+        }
     }
 
     public static void main(String[] args){
@@ -94,16 +109,33 @@ public class CardGame{
             System.err.println("not enough players");
             return;
         }
-        int numPlayers=Integer.parseInt(args[0]);
-        String packFile= args[1];
+        //int numPlayers=Integer.parseInt(args[0]);
+        int numPlayers;
+        String packFile= args[0];
+        try{
+            numPlayers= Integer.parseInt(args[1]);
+            if (numPlayers<=0){
+                System.err.println("Number of players must be positive");
+                return;
+                }
+            } catch (NumberFormatException e){
+                System.err.println("Invalid n");
+                return;
+            }
+        
         CardGame game= new CardGame();
         try{
             game.readPack(packFile);
+            int expected=numPlayers*8;
+            if(game.pack.size()!=expected){
+                System.err.println("Pack must contain "+expected+" cards");
+                return;
+            }
             game.setUpGame(numPlayers);
             game.startGame();
         } catch(Exception e){
             System.err.println("error: "+e.getMessage());
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 }
