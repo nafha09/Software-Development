@@ -37,3 +37,9 @@ test with all kinds of pack ( with winning possibilities, with no possibilities)
 - work on main test - nafha
 
 
+Day 5
+22/10/2025
+13:30 - 14:30
+deck class exception issue
+fix deck.java 
+- test main cardgame - nafha
