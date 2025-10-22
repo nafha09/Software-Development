@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,10 @@ import java.util.List;
     private Deck rightDeck;
     private boolean hasWon;
     private final int preferredValue;
+    private final String outputFile;
+    //shared win flag
+    private static volatile boolean gameWon=false;
+    private static volatile int winningPlayerId=-1;
 
     /**
      * constructor
@@ -35,6 +41,9 @@ import java.util.List;
         this.hand=new ArrayList<>(startingCards);
         this.hasWon=false;
         this.preferredValue = playerId;
+        this.outputFile="player"+playerId+"output.txt";
+        clearLog();
+        log("final hand: "+handToString());
     }
 
     /// setting decks
@@ -74,7 +83,7 @@ import java.util.List;
         }
         Card drawn=rightDeck.discardCard();
         hand.add(drawn);
-        System.out.println("Player"+playerId+"drew card"+drawn.getValue());
+        log("Player"+playerId+"draws"+drawn.getValue()+"from deck"+rightDeck.getId());
     }
 
     /** discard card and add it to left deck
@@ -88,7 +97,7 @@ import java.util.List;
         if (!hand.isEmpty()){
             Card discarded=hand.remove(0);
             leftDeck.drawCard(discarded);
-            System.out.println("Player"+playerId+"discarded card"+discarded.getValue());
+            log("Player"+playerId+"discards"+discarded.getValue()+"to deck"+leftDeck.getId());
         }
     }
 
@@ -103,8 +112,13 @@ import java.util.List;
                 return false;
             }
         }
-        hasWon=true;
-        System.out.println("Player"+playerId+"has won");
+        if (!gameWon){
+            gameWon=true;
+            winningPlayerId= playerId;
+            hasWon=true;
+            log("Player "+playerId+" has won");
+            System.out.println("Player "+playerId+" has won");
+        }
         return true;
     }
 
@@ -114,26 +128,49 @@ import java.util.List;
     @Override
     public void run(){
         try {
-            while (!hasWon){
+            while (!gameWon){
                 drawCard();
                 discardCard();
-                if (checkIfWon()){
-                    break;
-                }
+                checkIfWon();
             }
+            if (!hasWon) log(winningPlayerId +"has won");
+            log("Final hand: "+handToString());
         } catch (EmptyDeckException e){
             System.err.println("Player"+playerId+"has encounted an empty deck");
         }
     }
 
-    //return string representation of player's hand
-    @Override
-    public String toString(){
-        StringBuilder sb= new StringBuilder("Player"+playerId+"hand:");
-        for (Card c: hand){
-            sb.append(c.getValue()).append(" ");
+    private void log(String msg){
+        try (FileWriter fw= new FileWriter(outputFile, true)){
+            fw.write(msg+System.lineSeparator());
+        } catch(IOException e){
+            System.err.println("Error in writing log for player "+playerId);
         }
-        return sb.toString().trim();
+    }
+    private void clearLog(){
+        try (FileWriter fw=new FileWriter(outputFile, false)){
+            fw.write("");
+        } catch (IOException ignored){
+        }
+    }
+
+    //return string representation of player's hand
+    //@Override
+    private String handToString(){
+        StringBuilder sb= new StringBuilder("[");
+        for (int i=0; i< hand.size();i++){
+            sb.append(hand.get(i).getValue());
+            if (i< hand.size()-1){
+                 sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+        //StringBuilder sb= new StringBuilder("Player"+playerId+"hand:");
+        //for (Card c: hand){
+        //    sb.append(c.getValue()).append(" ");
+//}
+        //return sb.toString().trim();
     }
  }
 
