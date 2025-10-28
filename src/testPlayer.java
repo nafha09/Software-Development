@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Arrays;
 
-public class PlayerTest{
+public class testPlayer{
     public static void main(String[] args){
         //try{ // borrowing the concept from decktest
             Card card_one=new Card(1);

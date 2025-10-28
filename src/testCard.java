@@ -1,4 +1,4 @@
-public class CardTest {
+public class testCard {
     public static void main(String[] args) {
         Card test1 = new Card(1);
         //Card test2 = new Card(-1); // to make sure no invalid cards are created or stored 

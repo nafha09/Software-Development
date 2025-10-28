@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Arrays;
 
-public class DeckTest{
+public class testDeck{
     public static void main(String[] args){
         try{
             //create a list of cards for deck
