@@ -27,8 +27,8 @@ public class testPlayer{
             Player player=new Player(1,startingCards);
             System.out.println("Player's hand at the start: "+player);
 
-    //*
-
+    
+/*
             //draw top card
             Card removedCard=deck.discardCard();
             System.out.println("Removed top card: "+removedCard.getValue());
@@ -44,8 +44,8 @@ public class testPlayer{
             while(true){
                 deck.discardCard();
                 System.out.println("After discard: "+deck);
-            }
-    */
+            }*/
+    
         //}
     }
 }

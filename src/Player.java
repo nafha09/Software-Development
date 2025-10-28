@@ -100,7 +100,7 @@ import java.util.List;
         }
         if (!hand.isEmpty()){
             Card discarded=hand.remove(0);
-            if (discarded.getValue().equals(preferredValue)){
+            if (discarded.getValue() == (preferredValue)){
                 return; 
             }  
             leftDeck.drawCard(discarded);
