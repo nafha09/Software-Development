@@ -9,8 +9,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class testPlayer{
+
+
     @Test
-    public void testPlayerMethods() {
+    public void testPlayerCreation() {
 
         //try{ // borrowing the concept from decktest
             Card card_one=new Card(1);
@@ -35,26 +37,10 @@ public class testPlayer{
             // checking player hand
             Player player=new Player(1,startingCards);
             System.out.println("Player's hand at the start: "+player);
+            // junit assetion 
+            assertEquals("Player should start with 4 cards", 4, startingCards.size());
+            System.out.println("Player's hand at the start: " + startingCards);
 
-    
-/*
-            //draw top card
-            Card removedCard=deck.discardCard();
-            System.out.println("Removed top card: "+removedCard.getValue());
-            System.out.println("Deck after removing top card "+deck);
-            //add new card to bottom of deck
-            deck.drawCard(new Card(9));
-            System.out.println("Added card with value 9");
-            System.out.println("Deck after picking up cark: "+deck);
-            //check if all cards are of same value
-            boolean allSame= deck.sameCards();
-            System.out.println("Are the cards of same value? "+allSame);
-            //discarding card to trigger EmptyDeckException
-            while(true){
-                deck.discardCard();
-                System.out.println("After discard: "+deck);
-            }*/
     
         }//}}
     }
-}
