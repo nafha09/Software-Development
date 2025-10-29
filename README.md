@@ -5,7 +5,7 @@ coursework
 javac -d bin src/TestFileName.java //bin or out
 java -cp bin TestFileName
 
-javac -d out src/Card.java src/CardTest.java // to run both files together
+javac -d bin src/Card.java src/CardTest.java // to run both files together
 
 /// to run all files ALWAYS USE THIS ONE 
 javac -d bin src/*.java
