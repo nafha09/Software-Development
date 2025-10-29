@@ -9,6 +9,9 @@ javac -d bin src/Card.java src/CardTest.java // to run both files together
 
 /// to run all files ALWAYS USE THIS ONE 
 javac -d bin src/*.java
+// COMPILE AND RUN WITH JUNIT FILES WITH THIS 
+javac -d bin -cp ".:library/junit-4.13.2.jar:library/hamcrest-core-1.3.jar" src/*.java
+java -cp ".:bin:library/junit-4.13.2.jar:library/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore testdeck (or whatever)
 
 
 /// file locations 

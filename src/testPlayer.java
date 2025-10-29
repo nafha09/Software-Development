@@ -1,8 +1,17 @@
 import java.util.List;
 import java.util.Arrays;
+import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class testPlayer{
-    public static void main(String[] args){
+    @Test
+    public void testPlayerMethods() {
+
         //try{ // borrowing the concept from decktest
             Card card_one=new Card(1);
             Card card_two=new Card(2);
@@ -46,6 +55,6 @@ public class testPlayer{
                 System.out.println("After discard: "+deck);
             }*/
     
-        //}
+        }//}}
     }
 }

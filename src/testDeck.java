@@ -1,8 +1,17 @@
 import java.util.List;
 import java.util.Arrays;
+import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class testDeck{
-    public static void main(String[] args){
+    
+    @Test
+    public void testDeckMethods() {
         try{
             //create a list of cards for deck
             Card card1=new Card(1);
@@ -18,6 +27,9 @@ public class testDeck{
             Card removedCard=deck.discardCard();
             System.out.println("Removed top card: "+removedCard.getValue());
             System.out.println("Deck after removing top card "+deck);
+            // validate the card removed with unit testing
+            assertNotNull("Removed card should not be null", removedCard);
+
             //add new card to bottom of deck
             deck.drawCard(new Card(9));
             System.out.println("Added card with value 9");
@@ -25,6 +37,7 @@ public class testDeck{
             //check if all cards are of same value
             boolean allSame= deck.sameCards();
             System.out.println("Are the cards of same value? "+allSame);
+            assertFalse("Deck should not have all same value cards", allSame);
             //discarding card to trigger EmptyDeckException
             while(true){
                 deck.discardCard();
@@ -32,6 +45,7 @@ public class testDeck{
             }
         } catch (EmptyDeckException e){
             System.err.println(e.getMessage());
+            assertEquals("Deck is empty!", e.getMessage());
         }
     }
 }
