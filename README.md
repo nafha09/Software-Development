@@ -32,3 +32,9 @@ java -cp ".:bin:library/junit-4.13.2.jar:library/hamcrest-core-1.3.jar" org.juni
     to move the test files 
 
 
+// how to create jar file (ONLY AFTER EVERYTHING IS DONE)
+jar cf CardGame.jar CardGame/
+could add a manifest.txt so can run
+
+// TO RUN .JAR FILE 
+java -jar CardGame.jar
