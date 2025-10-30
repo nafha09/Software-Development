@@ -29,6 +29,52 @@ public class CardGame{
     private final List<Deck> decks= new ArrayList<>();
     private final List<Card> pack= new ArrayList<>();
 
+
+    // the game run 
+    public static void main(String[] args){
+        // asking for number of players 
+        Scanner input = new Scanner(System.in);
+        System.out.print("Please enter the number of players:");
+        int numPlayers = input.nextInt();
+        input.nextLine();
+        System.out.print("Please enter location of pack to load:");
+        input.close();
+
+
+        if (args.length<2){
+            System.err.println("not enough players");
+            return;
+        }
+        //int numPlayers=Integer.parseInt(args[0]);
+        int numPlayers;
+        String packFile= args[0];
+        try{
+            numPlayers= Integer.parseInt(args[1]);
+            if (numPlayers<=0){
+                System.err.println("Number of players must be positive");
+                return;
+                }
+            } catch (NumberFormatException e){
+                System.err.println("Invalid n");
+                return;
+            }
+
+        CardGame game= new CardGame();
+        try{
+            game.readPack(packFile);
+            int expected=numPlayers*8;
+            if(game.pack.size()!=expected){
+                System.err.println("Pack must contain "+expected+" cards");
+                return;
+            }
+            game.setUpGame(numPlayers);
+            game.startGame();
+        } catch(Exception e){
+            System.err.println("error: "+e.getMessage());
+            //e.printStackTrace();
+        }
+    }
+/// extra methods needed for the game run
     //read and validate pack
     private void readPack(String filename) throws IOException{
         try (BufferedReader br = new BufferedReader(new FileReader(filename))){
@@ -112,50 +158,6 @@ public class CardGame{
             } catch (IOException e){
                 System.err.println("Error writing deck output "+e.getMessage());
             }
-        }
-    }
-/// shpuld main be in this class?
-    public static void main(String[] args){
-        // asking for number of players 
-        Scanner input = new Scanner(System.in);
-        System.out.print("Please enter the number of players:");
-        int numPlayers = input.nextInt();
-        input.nextLine();
-        System.out.print("Please enter location of pack to load:");
-        input.close();
-
-
-        if (args.length<2){
-            System.err.println("not enough players");
-            return;
-        }
-        //int numPlayers=Integer.parseInt(args[0]);
-        int numPlayers;
-        String packFile= args[0];
-        try{
-            numPlayers= Integer.parseInt(args[1]);
-            if (numPlayers<=0){
-                System.err.println("Number of players must be positive");
-                return;
-                }
-            } catch (NumberFormatException e){
-                System.err.println("Invalid n");
-                return;
-            }
-
-        CardGame game= new CardGame();
-        try{
-            game.readPack(packFile);
-            int expected=numPlayers*8;
-            if(game.pack.size()!=expected){
-                System.err.println("Pack must contain "+expected+" cards");
-                return;
-            }
-            game.setUpGame(numPlayers);
-            game.startGame();
-        } catch(Exception e){
-            System.err.println("error: "+e.getMessage());
-            //e.printStackTrace();
         }
     }
 }

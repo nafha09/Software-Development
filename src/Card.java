@@ -34,7 +34,6 @@ public final class Card{
 
     //Getter
     public int getValue(){
-        //@returns value of the card
         return value;
     }
 
