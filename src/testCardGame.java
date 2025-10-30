@@ -11,8 +11,13 @@ import static org.junit.Assert.*;
 public class testCardGame{
     @Test
     public void testReadPack(){
+    String filename = "pack.txt";
+    List<Card> startingCards = CardGame.readPack(filename);
+    assertNotNull("Cards list should not be null", startingCards);
+    assertTrue("Cards list should not be empty", startingCards.size() > 0);
 
     }
+    /** 
     @Test 
     public void testSetUpGame(){
 
@@ -26,6 +31,6 @@ public class testCardGame{
 
     }
     @Test void testMain() {
-        
-    }
+
+    }*/
 }
