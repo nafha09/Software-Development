@@ -2,6 +2,7 @@
  * for the entire card play
  * 
  */
+import java.util.Scanner;
 import java.io.*;
 import java.util.*;
 
@@ -103,8 +104,17 @@ public class CardGame{
             }
         }
     }
-
+/// shpuld main be in this class?
     public static void main(String[] args){
+        // asking for number of players 
+        Scanner input = new Scanner(System.in);
+        System.out.print("Please enter the number of players:");
+        int numPlayers = input.nextInt();
+        input.nextLine();
+        System.out.print("Please enter location of pack to load:");
+        input.close();
+
+
         if (args.length<2){
             System.err.println("not enough players");
             return;
@@ -122,7 +132,7 @@ public class CardGame{
                 System.err.println("Invalid n");
                 return;
             }
-        
+
         CardGame game= new CardGame();
         try{
             game.readPack(packFile);
