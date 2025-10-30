@@ -1,5 +1,8 @@
+package CardGame;
+import java.util.Scanner;
 import java.util.List;
 import java.util.Arrays;
+import java.util.ArrayList;
 import org.junit.BeforeClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,12 +10,13 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.io.IOException;
 
 public class testCardGame{
     @Test
     void testReadPack(){
     String filename = "pack.txt";
-    List<Card> startingCards = CardGame.readPack(filename); // will be fixed with packaging
+    List<Card> startingCards = readPack(filename); // will be fixed with packaging
     assertNotNull("Cards list should not be null", startingCards);
     assertTrue("Cards list should not be empty", startingCards.size() > 0);
 

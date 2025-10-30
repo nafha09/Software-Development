@@ -1,7 +1,18 @@
+package CardGame;
+import java.util.Scanner;
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
+import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Represents a player in the game
