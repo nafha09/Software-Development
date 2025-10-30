@@ -10,18 +10,25 @@ import static org.junit.Assert.*;
 
 public class testCardGame{
     @Test
-    public void testReadPack(){
+    void testReadPack(){
     String filename = "pack.txt";
-    List<Card> startingCards = CardGame.readPack(filename);
+    List<Card> startingCards = CardGame.readPack(filename); // will be fixed with packaging
     assertNotNull("Cards list should not be null", startingCards);
     assertTrue("Cards list should not be empty", startingCards.size() > 0);
 
     }
-    /** 
+    
     @Test 
-    public void testSetUpGame(){
-
+    void testSetUpGame(){
+        CardGame game = new CardGame();
+        int numPlayers = 4;
+        game.setUpGame(numPlayers);
+        assertEquals(numPlayers, game.getDecks().size());
+        assertEquals(numPlayers, game.getPlayers().size());
+        assertEquals(game.getDecks().get(0), game.getPlayers().get(0).getLeftDeck());
+        assertEquals(game.getDecks().get(1), game.getPlayers().get(0).getRightDeck());
     }
+    /**
     @Test
     public void distributeCards (){
 
