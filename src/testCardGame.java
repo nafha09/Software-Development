@@ -28,11 +28,19 @@ public class testCardGame{
         assertEquals(game.getDecks().get(0), game.getPlayers().get(0).getLeftDeck());
         assertEquals(game.getDecks().get(1), game.getPlayers().get(0).getRightDeck());
     }
-    /**
+    
     @Test
     public void distributeCards (){
-
+        CardGame game = new CardGame();
+        int numPlayers = 4;
+        for (int i = 0; i < numPlayers; i++) {
+            assertEquals("Player " + i + " should have 4 cards",4, game.getPlayers().get(i).getHand().size());
+        }
+        for (int i = 0; i < numPlayers; i++) {
+            assertEquals("Deck " + i + " should have 4 cards",4, game.getDecks().get(i).getCards().size());
+        }
     }
+    /**
     @Test
     public void testwriteFinalDecks() {
 
