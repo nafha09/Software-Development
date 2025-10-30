@@ -1,4 +1,4 @@
-mport java.util.List;
+import java.util.List;
 import java.util.Arrays;
 import org.junit.BeforeClass;
 import org.junit.Before;
@@ -12,5 +12,20 @@ public class testCardGame{
     @Test
     public void testReadPack(){
 
+    }
+    @Test 
+    public void testSetUpGame(){
+
+    }
+    @Test
+    public void distributeCards (){
+
+    }
+    @Test
+    public void testwriteFinalDecks() {
+
+    }
+    @Test void testMain() {
+        
     }
 }
