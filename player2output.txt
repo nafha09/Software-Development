@@ -1,2 +1,3 @@
 final hand: [2, 3, 4, 5]
-Player2draws8from deck2
+Player 2 draws 11 from deck 1
+Player 2 discards 3 to deck 2
