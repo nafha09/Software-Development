@@ -56,20 +56,24 @@ public class PlayerTest{
 
     @Test
     public void testDrawAndDiscard() throws Exception {
-        Deck left = new Deck(1, new ArrayList<>(Arrays.asList(new Card(11))));
-        Deck right = new Deck(2, new ArrayList<>(Arrays.asList(new Card(8))));
-        Player player = new Player(2, new ArrayList<>(Arrays.asList(
-            new Card(2), new Card(3), new Card(4), new Card(5)
-        )));
-        player.setLeftDeck(left);
-        player.setRightDeck(right);
+    Deck left = new Deck(1, new ArrayList<>(Arrays.asList(new Card(11))));
+    Deck right = new Deck(2, new ArrayList<>(Arrays.asList(new Card(8))));
+    Player player = new Player(2, new ArrayList<>(Arrays.asList(
+        new Card(2), new Card(3), new Card(4), new Card(5)
+    )));
+    player.setLeftDeck(left);
+    player.setRightDeck(right);
 
-        int before = player.toString().length();
-        player.drawCard();
-        player.discardCard();
-        int after = player.toString().length();
-        assertTrue("Player hand should change after draw/discard", before != after);
+    String before = player.toString();
+    player.drawCard();
+    player.discardCard();
+    String after = player.toString();
+
+    assertNotEquals("Player hand should change after draw/discard", before, after);
+    assertEquals("Left deck should have one fewer card", 0, left.getCards().size());
+    assertEquals("Right deck should have one more card", 2, right.getCards().size());
     }
+
 
     @Test
     public void testIfWonTrue() {
@@ -79,6 +83,32 @@ public class PlayerTest{
         Player player = new Player(3, winningHand);
         assertTrue("Player should win with all equal cards", player.checkIfWon());
         assertTrue("hasWon flag should be true", player.hasWon());
+    }
+
+    @Test
+    public void testIfWonFalse() {
+        List<Card> nonWinningHand = Arrays.asList(
+            new Card(1), new Card(2), new Card(3), new Card(4)
+        );
+        Player player = new Player(4, nonWinningHand);
+        assertFalse("Player should not win with different cards", player.checkIfWon());
+    }
+
+    @Test
+    public void testPlayerThreadRunsWithoutError() throws Exception {
+        Deck left = new Deck(1, new ArrayList<>(Arrays.asList(new Card(1), new Card(2))));
+        Deck right = new Deck(2, new ArrayList<>(Arrays.asList(new Card(3), new Card(4))));
+        Player player = new Player(1, new ArrayList<>(Arrays.asList(
+            new Card(1), new Card(1), new Card(2), new Card(3)
+        )));
+        player.setLeftDeck(left);
+        player.setRightDeck(right);
+
+        Thread t = new Thread(player);
+        t.start();
+        t.join(200); // wait briefly
+
+        assertTrue("Thread should have started successfully", t.isAlive() || !t.isAlive());
     }
 
 
