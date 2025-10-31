@@ -94,31 +94,48 @@ import java.io.*;
      * @throws IllegalStateException -if right deck has not been assigned
      */
     public synchronized void drawCard() throws EmptyDeckException{
-        if (rightDeck==null){
-            throw new IllegalStateException("Right deck is empty");
+        if (leftDeck==null){
+            throw new IllegalStateException("Right deck not assigned");
         }
-        Card drawn=rightDeck.discardCard();
+        Card drawn=leftDeck.discardCard();
         hand.add(drawn);
-        log("Player"+playerId+"draws"+drawn.getValue()+"from deck"+rightDeck.getId());
+        log("Player "+playerId+" draws "+drawn.getValue()+" from deck "+leftDeck.getId());
     }
 
     /** discard card and add it to left deck
      * @throws EmptyDeckException if the left deck is empty
      * @throws IllegalStateException if the left deck has not been assigned
      */
-    public synchronized void discardCard() throws EmptyDeckException{
-        if (leftDeck==null){
-            throw new IllegalStateException("Left deck is empty");
+    // Discard a card to the RIGHT deck
+    public synchronized void discardCard() throws EmptyDeckException {
+        if (rightDeck == null) {
+            throw new IllegalStateException("Left deck not assigned");
         }
-        if (!hand.isEmpty()){
-            Card discarded=hand.remove(0);
-            if (discarded.getValue() == (preferredValue)){
-                return; 
-            }  
-            leftDeck.drawCard(discarded);
-            log("Player"+playerId+"discards"+discarded.getValue()+"to deck"+leftDeck.getId());
+        if (!hand.isEmpty()) {
+            // Prefer discarding a non-preferred card
+            Card toDiscard = null;
+            for (Card c : hand) {
+                if (c.getValue() != preferredValue) {
+                    toDiscard = c;
+                    break;
+                }
+            }
+            // if all are preferred, just discard the first card
+            if (toDiscard == null) {
+                toDiscard = hand.get(0);
+            }
+            hand.remove(toDiscard);
+            rightDeck.drawCard(toDiscard);  //  put card on bottom of right deck
+            log("Player " + playerId + " discards " + toDiscard.getValue() + " to deck " + rightDeck.getId());
         }
     }
+            //if (discarded.getValue() == (preferredValue)){
+              //  return; 
+            //}  
+            //leftDeck.drawCard(discarded);
+            //log("Player"+playerId+"discards"+discarded.getValue()+"to deck"+leftDeck.getId());
+        //}
+    
 
     /** check is all cards in players hand is of same value
      * @return true if all cards are equal, else false
@@ -155,7 +172,7 @@ import java.io.*;
             if (!hasWon) log(winningPlayerId +"has won");
             log("Final hand: "+handToString());
         } catch (EmptyDeckException e){
-            System.err.println("Player"+playerId+"has encounted an empty deck");
+            System.err.println("Player "+playerId+" has encounted an empty deck");
         }
     }
     @Override
