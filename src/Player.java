@@ -3,15 +3,16 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
-import org.junit.BeforeClass;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import java.io.FileWriter;
-import java.io.IOException;
+//import org.junit.BeforeClass;
+//import org.junit.Before;
+//import org.junit.Test;
+//import org.junit.After;
+//import org.junit.AfterClass;
+//import org.junit.Test;
+//import static org.junit.Assert.*;
+import java.io.*;
+//import java.io.FileWriter;
+//import java.io.IOException;
 
 
 /**
@@ -157,6 +158,10 @@ import java.io.IOException;
             System.err.println("Player"+playerId+"has encounted an empty deck");
         }
     }
+    @Override
+    public String toString() {
+        return "Player " + playerId + " hand: " + handToString();
+    }
 
     private void log(String msg){
         try (FileWriter fw= new FileWriter(outputFile, true)){
@@ -190,5 +195,14 @@ import java.io.IOException;
 //}
         //return sb.toString().trim();
     }
+        /**
+     * Utility method for testing — resets shared game state.
+     * This ensures JUnit tests run independently.
+     */
+    public static void resetGameStateForTests() {
+        gameWon = false;
+        winningPlayerId = -1;
+    }
+
  }
 

@@ -1,0 +1,2 @@
+final hand: [7, 7, 7, 7]
+Player 3 has won

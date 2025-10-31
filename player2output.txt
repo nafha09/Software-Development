@@ -1,1 +1,2 @@
-final hand: [1, 2, 3, 4]
+final hand: [2, 3, 4, 5]
+Player2draws8from deck2

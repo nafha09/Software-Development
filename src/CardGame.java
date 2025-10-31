@@ -3,14 +3,15 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
-import org.junit.BeforeClass;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import java.io.IOException;
+//import org.junit.BeforeClass;
+//import org.junit.Before;
+//import org.junit.Test;
+//import org.junit.After;
+//import org.junit.AfterClass;
+//import org.junit.Test;
+//import static org.junit.Assert.*;
+//import java.io.IOException;
+import java.io.*;
 /** main 
  * for the entire card play
  * 
@@ -46,7 +47,7 @@ public class CardGame{
             return;
         }
         //int numPlayers=Integer.parseInt(args[0]);
-        int numPlayers;
+        //int numPlayers;
         String packFile= args[0];
         try{
             numPlayers= Integer.parseInt(args[1]);
