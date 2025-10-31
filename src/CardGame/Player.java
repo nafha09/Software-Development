@@ -46,7 +46,7 @@ import java.io.*;
         if (playerId < 0){
             throw new IllegalArgumentException("Player Id must be non-negative");
         }
-        if (startingCards == null || startingCards.isEmpty()){
+        if (startingCards == null ){//|| startingCards.isEmpty()){
             throw new IllegalArgumentException("Starting hand must not be empty");
         }
         this.playerId=playerId;

@@ -37,7 +37,7 @@ public final class Deck{
         if (id<0) { // excluding non-negative numbers  
             throw new IllegalArgumentException ("Deck must be non-negative");
         }
-        if (cards == null || cards.isEmpty()) {
+        if (cards == null) {//|| cards.isEmpty()) {
             throw new EmptyDeckException("Deck is empty");
         }
         this.id = id;

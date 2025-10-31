@@ -148,6 +148,15 @@ public class CardGame {
         writeFinalDecks();
         System.out.println("Game complete");
     }
+    // --- Getters for testing and verification ---
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public List<Deck> getDecks() {
+        return decks;
+    }
+
 
     /**
      * Writes the final contents of each deck to its output file.

@@ -1,3 +1,11 @@
-final hand: [2, 3, 4, 5]
-Player 2 draws 11 from deck 1
-Player 2 discards 3 to deck 2
+final hand: []
+Player 2 draws 3 from deck 2
+Player 2 discards 1 to deck 1
+Player 2 draws 3 from deck 2
+Player 2 discards 1 to deck 1
+Player 2 draws 4 from deck 2
+Player 2 discards 3 to deck 1
+Player 2 draws 4 from deck 2
+Player 2 discards 3 to deck 1
+1has won
+Final hand: [2, 2, 4, 4]
