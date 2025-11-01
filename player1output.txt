@@ -11,3 +11,7 @@ Player 1 draws 4 from deck 1
 Player 1 discards 11 to deck 2
 Player 1 draws 6 from deck 1
 Player 1 discards 13 to deck 2
+Player 1 draws 8 from deck 1
+Player 1 discards 15 to deck 2
+Player 1 draws 10 from deck 1
+Player 1 discards 4 to deck 2

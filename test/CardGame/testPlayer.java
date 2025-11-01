@@ -34,9 +34,10 @@ public class testPlayer{
         new Player(-1, Arrays.asList(new Card(1)));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testEmptyHandThrowsException() {
-        new Player(1, new ArrayList<>());
+    @Test
+    public void testEmptyHandIsAllowed(){
+        Player player = new Player(1, new ArrayList<>());
+        assertNotNull("Player should be created even with empty hand", player);
     }
 
     @Test

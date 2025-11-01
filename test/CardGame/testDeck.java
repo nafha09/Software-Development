@@ -1,4 +1,4 @@
-//package CardGame;
+package CardGame;
 import CardGame.Card;
 import CardGame.Deck;
 import CardGame.EmptyDeckException;
