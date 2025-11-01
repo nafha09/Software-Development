@@ -15,7 +15,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import java.io.IOException;
 
-public class DeckTest{
+public class testDeck{
     
      @Test
     public void testDeckInitialisation() throws EmptyDeckException {

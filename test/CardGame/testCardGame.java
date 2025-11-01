@@ -20,7 +20,7 @@ import java.io.*;
  * These tests verify correct setup, distribution,
  * and safe handling of invalid data.
  */
-public class CardGameTest {
+public class testCardGame {
 
     private CardGame game;
     private String validPackFile;

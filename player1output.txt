@@ -1,15 +1,13 @@
 final hand: []
-Player 1 draws 3 from deck 1
-Player 1 discards 2 to deck 2
-Player 1 draws 3 from deck 1
-Player 1 discards 2 to deck 2
-Player 1 draws 4 from deck 1
+Player 1 draws 9 from deck 1
 Player 1 discards 3 to deck 2
+Player 1 draws 11 from deck 1
+Player 1 discards 5 to deck 2
+Player 1 draws 13 from deck 1
+Player 1 discards 7 to deck 2
+Player 1 draws 15 from deck 1
+Player 1 discards 9 to deck 2
 Player 1 draws 4 from deck 1
-Player 1 discards 3 to deck 2
-Player 1 draws 1 from deck 1
-Player 1 discards 4 to deck 2
-Player 1 draws 1 from deck 1
-Player 1 discards 4 to deck 2
-Player 1 has won
-Final hand: [1, 1, 1, 1]
+Player 1 discards 11 to deck 2
+Player 1 draws 6 from deck 1
+Player 1 discards 13 to deck 2

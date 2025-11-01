@@ -12,7 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import java.io.IOException;
 
-public class PlayerTest{
+public class testPlayer{
 
     @Before
     public void resetGameState() {

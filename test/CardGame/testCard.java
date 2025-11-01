@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * Unit tests for the Card class.
  */
-public class CardTest {
+public class testCard {
 
     @Test
     public void testValidCardCreation() {
