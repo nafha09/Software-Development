@@ -4,72 +4,66 @@ import java.util.*;
 import java.io.*;
 
 /**
- * A quick, non-interactive test harness for CardGame.
- * 
- * This is NOT a JUnit test — it's a simple console test to verify
- * that CardGame setup, distribution, and threading work correctly.
+ * A quick manual test (non-JUnit) for verifying
+ * pack reading, player/deck setup, and card distribution.
+ * Prints detailed debug info about how cards are dealt.
  */
+
 public class CardGameQuickTest {
     public static void main(String[] args) {
-        System.out.println("=== CardGameQuickTest ===");
-
         try {
-            // Create a new game instance
+            // --- Create a simple test pack (16 cards for 2 players) ---
+            List<Integer> values = Arrays.asList(
+                1, 2, 3, 4, 5, 6, 7, 8,    // first 8 → players
+                9, 10, 11, 12, 13, 14, 15, 16 // next 8 → decks
+            );
+
+            String testPackFile = "packs/game1.txt";
+            new File("packs").mkdirs();
+            try (FileWriter fw = new FileWriter(testPackFile)) {
+                for (int v : values) fw.write(v + "\n");
+            }
+
+            // --- Run the game setup manually ---
             CardGame game = new CardGame();
 
-            // Manually build a pack of 16 cards for 2 players
-            // (8 cards per player total)
-            List<Card> mockPack = new ArrayList<>();
-            for (int i = 1; i <= 16; i++) {
-                mockPack.add(new Card(i));
-            }
+            // Use reflection to call private methods for testing setup
+            java.lang.reflect.Method readPack =
+                CardGame.class.getDeclaredMethod("readPack", String.class);
+            java.lang.reflect.Method setUpGame =
+                CardGame.class.getDeclaredMethod("setUpGame", int.class);
+            java.lang.reflect.Method distributeCards =
+                CardGame.class.getDeclaredMethod("distributeCards", int.class);
+            readPack.setAccessible(true);
+            setUpGame.setAccessible(true);
+            distributeCards.setAccessible(true);
 
-            // Write mock pack to a temporary file
-            String testPackFile = "test_pack.txt";
-            try (FileWriter fw = new FileWriter(testPackFile)) {
-                for (Card c : mockPack) {
-                    fw.write(c.getValue() + System.lineSeparator());
+            readPack.invoke(game, testPackFile);
+            setUpGame.invoke(game, 2); // 2 players
+            //distributeCards.invoke(game, 2);
+
+            // --- Debug print: which cards went where ---
+            System.out.println("=== CARD DISTRIBUTION DEBUG ===");
+
+            List<Player> players = game.getPlayers();
+            List<Deck> decks = game.getDecks();
+
+            for (int i = 0; i < players.size(); i++) {
+                System.out.println("Player " + (i + 1) + " hand: " + players.get(i));
+            }
+            for (int i = 0; i < decks.size(); i++) {
+                System.out.print("Deck " + (i + 1) + " cards: ");
+                for (Card c : decks.get(i).getCards()) {
+                    System.out.print(c.getValue() + " ");
                 }
+                System.out.println();
             }
 
-            // Simulate the main logic manually
-            // Equivalent of main() but without user input
-            System.out.println("Setting up a 2-player game with mock pack...");
-
-            // Access private methods via reflection (if needed) — or, better:
-            // temporarily make them package-private if running inside CardGame package
-            CardGame gameInstance = new CardGame();
-
-            // Read pack using reflection call (or just replicate)
-            var readPackMethod = CardGame.class.getDeclaredMethod("readPack", String.class);
-            readPackMethod.setAccessible(true);
-            readPackMethod.invoke(gameInstance, testPackFile);
-
-            // Set up and start game
-            var setupMethod = CardGame.class.getDeclaredMethod("setUpGame", int.class);
-            setupMethod.setAccessible(true);
-            setupMethod.invoke(gameInstance, 2);
-
-            var startMethod = CardGame.class.getDeclaredMethod("startGame");
-            startMethod.setAccessible(true);
-            startMethod.invoke(gameInstance);
-
-            // Verification summary
-            System.out.println("\n--- Verification ---");
-            System.out.println("Players created: " + gameInstance.getPlayers().size());
-            System.out.println("Decks created: " + gameInstance.getDecks().size());
-            for (Player p : gameInstance.getPlayers()) {
-                System.out.println(p);
-            }
-            for (Deck d : gameInstance.getDecks()) {
-                System.out.println(d);
-            }
-
-            System.out.println("\n CardGameQuickTest completed successfully.");
+            System.out.println("CardGameQuickTest completed successfully.");
 
         } catch (Exception e) {
-            System.err.println("Test failed: " + e.getMessage());
             e.printStackTrace();
         }
     }
 }
+
