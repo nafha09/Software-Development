@@ -1,1 +1,11 @@
 final hand: []
+Player 2 draws 7 from deck 2
+Player 2 discards 1 to deck 1
+Player 2 draws 9 from deck 2
+Player 2 discards 1 to deck 1
+Player 2 draws 11 from deck 2
+Player 2 discards 3 to deck 1
+Player 2 draws 13 from deck 2
+Player 2 discards 5 to deck 1
+Player 1 has won
+Final hand: [7, 9, 11, 13]

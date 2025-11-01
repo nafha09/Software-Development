@@ -1,1 +1,15 @@
 final hand: []
+Player 1 draws 6 from deck 1
+Player 1 discards 2 to deck 2
+Player 1 draws 8 from deck 1
+Player 1 discards 4 to deck 2
+Player 1 draws 10 from deck 1
+Player 1 discards 6 to deck 2
+Player 1 draws 12 from deck 1
+Player 1 discards 8 to deck 2
+Player 1 draws 1 from deck 1
+Player 1 discards 10 to deck 2
+Player 1 draws 1 from deck 1
+Player 1 discards 12 to deck 2
+Player 1 has won
+Final hand: [1, 1, 1, 1]

@@ -162,19 +162,71 @@ import java.io.*;
     //represent player's turn as a thread
     //player will draw/ discard cards until one wins of deck becomes empty
     @Override
-    public void run(){
+    public void run() {
         try {
-            while (!gameWon){
-                drawCard();
-                discardCard();
+            // Continue playing until someone wins
+            while (!gameWon) {
+
+                // Only draw if the left deck still has cards
+                if (!leftDeck.isEmpty()) {
+                    drawCard();
+                } else {
+                    // Stop this player's turn if deck is empty
+                    System.err.println("Player " + playerId + " has encounted an empty deck");
+                    break;
+                }
+
+                // Always attempt to discard a card to the right deck
+                if (!hand.isEmpty()) {
+                    discardCard();
+                }
+
+                // Check after each round if the player has won
                 checkIfWon();
             }
-            if (!hasWon) log(winningPlayerId +"has won");
-            log("Final hand: "+handToString());
-        } catch (EmptyDeckException e){
-            System.err.println("Player "+playerId+" has encounted an empty deck");
+
+            // When game is over, log outcome for this player
+            if (!hasWon) {
+                log("Player " + winningPlayerId + " has won");
+            }
+
+            log("Final hand: " + handToString());
+
+        } catch (EmptyDeckException e) {
+            // Safety catch — though with isEmpty() guard, this should not occur
+            System.err.println("Player " + playerId + " has encounted an empty deck");
         }
     }
+
+
+    /* 
+    public void run() {
+        try {
+            while (!gameWon) {
+                synchronized (this) { 
+                    drawCard();
+                    discardCard();
+                    checkIfWon();
+                }
+
+                // Allow other players a chance to act (simulate turn-taking)
+                Thread.sleep(100);
+            }
+
+            if (!hasWon) {
+                log("Player " + winningPlayerId + " has won");
+            }
+            log("Final hand: " + handToString());
+
+        } catch (EmptyDeckException e) {
+            System.err.println("Player " + playerId + " has encounted an empty deck");
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.err.println("Player " + playerId + " was interrupted");
+        }
+    }
+    */
+
     @Override
     public String toString() {
         return "Player " + playerId + " hand: " + handToString();
