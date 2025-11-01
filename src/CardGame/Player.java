@@ -3,15 +3,16 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
-import org.junit.BeforeClass;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import java.io.FileWriter;
-import java.io.IOException;
+//import org.junit.BeforeClass;
+//import org.junit.Before;
+//import org.junit.Test;
+//import org.junit.After;
+//import org.junit.AfterClass;
+//import org.junit.Test;
+//import static org.junit.Assert.*;
+import java.io.*;
+//import java.io.FileWriter;
+//import java.io.IOException;
 
 
 /**
@@ -45,7 +46,7 @@ import java.io.IOException;
         if (playerId < 0){
             throw new IllegalArgumentException("Player Id must be non-negative");
         }
-        if (startingCards == null || startingCards.isEmpty()){
+        if (startingCards == null ){//|| startingCards.isEmpty()){
             throw new IllegalArgumentException("Starting hand must not be empty");
         }
         this.playerId=playerId;
@@ -93,31 +94,48 @@ import java.io.IOException;
      * @throws IllegalStateException -if right deck has not been assigned
      */
     public synchronized void drawCard() throws EmptyDeckException{
-        if (rightDeck==null){
-            throw new IllegalStateException("Right deck is empty");
+        if (leftDeck==null){
+            throw new IllegalStateException("Right deck not assigned");
         }
-        Card drawn=rightDeck.discardCard();
+        Card drawn=leftDeck.discardCard();
         hand.add(drawn);
-        log("Player"+playerId+"draws"+drawn.getValue()+"from deck"+rightDeck.getId());
+        log("Player "+playerId+" draws "+drawn.getValue()+" from deck "+leftDeck.getId());
     }
 
     /** discard card and add it to left deck
      * @throws EmptyDeckException if the left deck is empty
      * @throws IllegalStateException if the left deck has not been assigned
      */
-    public synchronized void discardCard() throws EmptyDeckException{
-        if (leftDeck==null){
-            throw new IllegalStateException("Left deck is empty");
+    // Discard a card to the RIGHT deck
+    public synchronized void discardCard() throws EmptyDeckException {
+        if (rightDeck == null) {
+            throw new IllegalStateException("Left deck not assigned");
         }
-        if (!hand.isEmpty()){
-            Card discarded=hand.remove(0);
-            if (discarded.getValue() == (preferredValue)){
-                return; 
-            }  
-            leftDeck.drawCard(discarded);
-            log("Player"+playerId+"discards"+discarded.getValue()+"to deck"+leftDeck.getId());
+        if (!hand.isEmpty()) {
+            // Prefer discarding a non-preferred card
+            Card toDiscard = null;
+            for (Card c : hand) {
+                if (c.getValue() != preferredValue) {
+                    toDiscard = c;
+                    break;
+                }
+            }
+            // if all are preferred, just discard the first card
+            if (toDiscard == null) {
+                toDiscard = hand.get(0);
+            }
+            hand.remove(toDiscard);
+            rightDeck.drawCard(toDiscard);  //  put card on bottom of right deck
+            log("Player " + playerId + " discards " + toDiscard.getValue() + " to deck " + rightDeck.getId());
         }
     }
+            //if (discarded.getValue() == (preferredValue)){
+              //  return; 
+            //}  
+            //leftDeck.drawCard(discarded);
+            //log("Player"+playerId+"discards"+discarded.getValue()+"to deck"+leftDeck.getId());
+        //}
+    
 
     /** check is all cards in players hand is of same value
      * @return true if all cards are equal, else false
@@ -154,8 +172,12 @@ import java.io.IOException;
             if (!hasWon) log(winningPlayerId +"has won");
             log("Final hand: "+handToString());
         } catch (EmptyDeckException e){
-            System.err.println("Player"+playerId+"has encounted an empty deck");
+            System.err.println("Player "+playerId+" has encounted an empty deck");
         }
+    }
+    @Override
+    public String toString() {
+        return "Player " + playerId + " hand: " + handToString();
     }
 
     private void log(String msg){
@@ -190,5 +212,14 @@ import java.io.IOException;
 //}
         //return sb.toString().trim();
     }
+        /**
+     * Utility method for testing — resets shared game state.
+     * This ensures JUnit tests run independently.
+     */
+    public static void resetGameStateForTests() {
+        gameWon = false;
+        winningPlayerId = -1;
+    }
+
  }
 

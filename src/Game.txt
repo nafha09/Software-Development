@@ -1,16 +1,3 @@
-package CardGame;
-import java.util.Scanner;
-import java.util.List;
-import java.util.Arrays;
-import java.util.ArrayList;
-import org.junit.BeforeClass;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import java.io.IOException;
 /** main 
  * for the entire card play
  * 
@@ -38,17 +25,30 @@ public class CardGame{
         int numPlayers = input.nextInt();
         input.nextLine();
         System.out.print("Please enter location of pack to load:");
+        String packFile=input.NextLine();
         input.close();
-
-
-        if (args.length<2){
-            System.err.println("not enough players");
+        CardGame game= new CardGame();
+        try {
+        game.readPack(packFile);
+        int expected = numPlayers * 8;
+        if (game.pack.size() != expected) {
+            System.err.println("Pack must contain " + expected + " cards");
             return;
         }
+        game.setUpGame(numPlayers);
+        game.startGame();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+        //if (args.length<2){
+          //  System.err.println("not enough players");
+           // return;
+        //}
         //int numPlayers=Integer.parseInt(args[0]);
-        int numPlayers;
-        String packFile= args[0];
-        try{
+        //int numPlayers;
+        //String packFile= args[0];
+        /*try{
             numPlayers= Integer.parseInt(args[1]);
             if (numPlayers<=0){
                 System.err.println("Number of players must be positive");
@@ -72,8 +72,7 @@ public class CardGame{
         } catch(Exception e){
             System.err.println("error: "+e.getMessage());
             //e.printStackTrace();
-        }
-    }
+        }*/
 /// extra methods needed for the game run
     //read and validate pack
     private void readPack(String filename) throws IOException{
@@ -95,9 +94,11 @@ public class CardGame{
      */
     private void setUpGame(int numPlayers) throws EmptyDeckException{
         //setting deck
-        for (int i=1; i<=numPlayers; i++){
-            decks.add(new Deck(i, new ArrayList<>()));
-        }
+        if (id < 0) throw new IllegalArgumentException("Deck id must be non-negative");
+        this.id = id;
+        this.cards = (cards == null) ? new ArrayList<>() : new ArrayList<>(cards);
+        //for (int i=1; i<=numPlayers; i++){
+            //decks.add(new Deck(i, new ArrayList<>()));
         //setting players
         for (int i=1; i<= numPlayers; i++){
             players.add(new Player(i, new ArrayList<>()));
@@ -115,22 +116,34 @@ public class CardGame{
     }
     private void distributeCards(int numPlayers) throws EmptyDeckException{
         int cardIndex=0;
-        //deal 4 cards to players
-        for (int i=0; i< numPlayers; i++){
-            for (int j=0; j< 4; j++){
-                players.get(i).addCard(pack.get(cardIndex++));
+        // deal 4 cards to each player, round-robin
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < numPlayers; j++) {
+                players.get(j).addCard(pack.get(cardIndex++));
             }
         }
-        //deal remaining to deck
-        for (int i=0; i< numPlayers; i++){
-            //List<Card> deckCards=new ArrayList<>();
-            for (int j=0; j<4; j++){
-                decks.get(i).drawCard(pack.get(cardIndex++));
-                //deckCards.add(pack.get(cardIndex++));
+
+        // deal remaining cards to decks, round-robin
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < numPlayers; j++) {
+                decks.get(j).drawCard(pack.get(cardIndex++));
             }
-            //decks.get(i).getCards().addAll(deckCards);
         }
     }
+        //deal 4 cards to players
+        //for (int i=0; i< numPlayers; i++){
+          //  for (int j=0; j< 4; j++){
+            //    players.get(i).addCard(pack.get(cardIndex++));
+            //}
+        //}
+        //deal remaining to deck
+        //for (int i=0; i< numPlayers; i++){
+            //List<Card> deckCards=new ArrayList<>();
+          //  for (int j=0; j<4; j++){
+            //    decks.get(i).drawCard(pack.get(cardIndex++));
+                //deckCards.add(pack.get(cardIndex++));
+            //decks.get(i).getCards().addAll(deckCards);
+        //}
 
     //create threads for all players
     private void startGame(){
@@ -161,3 +174,4 @@ public class CardGame{
         }
     }
 }
+*/

@@ -1,1 +1,15 @@
-final hand: [1, 2, 3, 4]
+final hand: []
+Player 1 draws 3 from deck 1
+Player 1 discards 2 to deck 2
+Player 1 draws 3 from deck 1
+Player 1 discards 2 to deck 2
+Player 1 draws 4 from deck 1
+Player 1 discards 3 to deck 2
+Player 1 draws 4 from deck 1
+Player 1 discards 3 to deck 2
+Player 1 draws 1 from deck 1
+Player 1 discards 4 to deck 2
+Player 1 draws 1 from deck 1
+Player 1 discards 4 to deck 2
+Player 1 has won
+Final hand: [1, 1, 1, 1]
